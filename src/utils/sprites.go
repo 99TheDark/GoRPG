@@ -1,13 +1,13 @@
-package main
+package utils
 
 import "github.com/hajimehoshi/ebiten/v2"
 
 const scale float64 = 1
 
 type Sprite struct {
-	image *ebiten.Image
 	x     int
 	y     int
+	image *ebiten.Image
 }
 
 func (sprite *Sprite) Draw(screen *ebiten.Image) {
