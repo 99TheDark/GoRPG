@@ -1,14 +1,14 @@
 package main
 
 import (
-	"fmt"
+	"game/files"
 	"game/utils"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-// var sprites []*Sprite
+var sprites []*utils.Sprite
 
 type Game struct{}
 
@@ -17,7 +17,9 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-
+	for i := 0; i < len(sprites); i++ {
+		sprites[i].Draw(screen)
+	}
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
@@ -26,9 +28,10 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 
 func init() {
 	// Why does it insist on this instead of utils.Sprite(0, 0, utils.CreateImage(…))?
-	sprite := utils.Sprite{X: 0, Y: 0, Image: utils.CreateImage("res/grass.png")}
+	sprite := utils.Sprite{X: 0, Y: 0, ImagePath: utils.CreateImage("grass.png")}
+	sprites = append(sprites, &sprite)
 
-	fmt.Println(sprite)
+	files.Save(sprites)
 }
 
 func main() {

@@ -7,12 +7,15 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
-func CreateImage(path string) *ebiten.Image {
-	img, _, err := ebitenutil.NewImageFromFile(path)
+var Images = map[string]*ebiten.Image{}
+
+func CreateImage(path string) string {
+	img, _, err := ebitenutil.NewImageFromFile("res/" + path)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return img
+	Images[path] = img
+	return path
 }
