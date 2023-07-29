@@ -8,7 +8,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-var sprites []*utils.Sprite
+var sprites utils.SpriteArray
 
 type Game struct{}
 
@@ -27,9 +27,9 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 }
 
 func init() {
-	// Why does it insist on this instead of utils.Sprite(0, 0, utils.CreateImage(…))?
-	sprite := utils.Sprite{X: 0, Y: 0, ImagePath: utils.CreateImage("grass.png")}
-	sprites = append(sprites, &sprite)
+	// sprites = files.Load()
+	sprites.Add(0, 0, "grass.png")
+	sprites.Add(1, 0, "grass.png")
 
 	files.Save(sprites)
 }
