@@ -1,4 +1,4 @@
-module github.com/99thedark/GoRPG
+module game
 
 go 1.20
 

@@ -5,16 +5,16 @@ import "github.com/hajimehoshi/ebiten/v2"
 const scale float64 = 1
 
 type Sprite struct {
-	x     int
-	y     int
-	image *ebiten.Image
+	X     int
+	Y     int
+	Image *ebiten.Image
 }
 
 func (sprite *Sprite) Draw(screen *ebiten.Image) {
 	options := &ebiten.DrawImageOptions{}
 
-	options.GeoM.Translate(float64(sprite.x), float64(sprite.y))
+	options.GeoM.Translate(float64(sprite.X), float64(sprite.Y))
 	options.GeoM.Scale(scale, scale)
 
-	screen.DrawImage(sprite.image, options)
+	screen.DrawImage(sprite.Image, options)
 }

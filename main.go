@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"game/utils"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -24,10 +25,10 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 }
 
 func init() {
-	// sprite := Sprite{0, 0, createImage("../res/grass.png")}
+	// Why does it insist on this instead of utils.Sprite(0, 0, utils.CreateImage(…))?
+	sprite := utils.Sprite{X: 0, Y: 0, Image: utils.CreateImage("res/grass.png")}
 
-	// fmt.Println(sprite)
-	fmt.Println(createImage("../res/grass.png"))
+	fmt.Println(sprite)
 }
 
 func main() {

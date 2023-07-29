@@ -7,7 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
-func createImage(path string) *ebiten.Image {
+func CreateImage(path string) *ebiten.Image {
 	img, _, err := ebitenutil.NewImageFromFile(path)
 
 	if err != nil {
