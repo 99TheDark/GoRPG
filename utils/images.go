@@ -10,7 +10,7 @@ import (
 var Images = map[string]*ebiten.Image{}
 
 func createImage(path string) string {
-	img, _, err := ebitenutil.NewImageFromFile("res/" + path)
+	img, _, err := ebitenutil.NewImageFromFile("res/sprites/" + path)
 
 	if err != nil {
 		log.Fatal(err)

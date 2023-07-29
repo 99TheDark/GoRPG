@@ -28,8 +28,35 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 
 func init() {
 	// sprites = files.Load()
-	sprites.Add(0, 0, "grass.png")
-	sprites.Add(1, 0, "grass.png")
+	w, h := 8, 6
+	for y := 0; y < h; y++ {
+		for x := 0; x < w; x++ {
+			img := "grass.png"
+			if x == 0 {
+				if y == 0 {
+					img = "grass_top_left.png"
+				} else if y == h-1 {
+					img = "grass_bottom_left.png"
+				} else {
+					img = "grass_left.png"
+				}
+			} else if x == w-1 {
+				if y == 0 {
+					img = "grass_top_right.png"
+				} else if y == h-1 {
+					img = "grass_bottom_right.png"
+				} else {
+					img = "grass_right.png"
+				}
+			} else if y == 0 {
+				img = "grass_top.png"
+			} else if y == h-1 {
+				img = "grass_bottom.png"
+			}
+
+			sprites.Add(x, y, img)
+		}
+	}
 
 	files.Save(sprites)
 }
