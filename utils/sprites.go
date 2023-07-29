@@ -6,7 +6,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-const scale float64 = 5
+const Scale float64 = 5 // TODO: Move to settings.go
 
 type Sprite struct {
 	X         int
@@ -20,7 +20,7 @@ func (sprite *Sprite) Draw(screen *ebiten.Image) {
 	options := &ebiten.DrawImageOptions{}
 
 	options.GeoM.Translate(float64(sprite.X*constants.TileSize), float64(sprite.Y*constants.TileSize))
-	options.GeoM.Scale(scale, scale)
+	options.GeoM.Scale(Scale, Scale)
 
 	screen.DrawImage(Images[sprite.ImagePath], options)
 }
