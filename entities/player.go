@@ -26,4 +26,7 @@ func (p *Player) Update(keys *utils.Keyboard) {
 	if keys.Down("D") {
 		p.Sprite.X += constants.PlayerSpeed
 	}
+
+	utils.Clamp(&p.Sprite.X, 0, 7)
+	utils.Clamp(&p.Sprite.Y, -1, 4)
 }
