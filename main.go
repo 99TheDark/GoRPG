@@ -30,51 +30,14 @@ func (g *Game) Draw(screen *ebiten.Image) {
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	setup(g)
-
 	return constants.ScreenWidth, constants.ScreenHeight
 }
 
-func setup(g *Game) {
-	// sprites = files.Load()
-
-	w, h := 8, 6
-	for y := 0; y < h; y++ {
-		for x := 0; x < w; x++ {
-			img := "grass.png"
-			if x == 0 {
-				if y == 0 {
-					img = "grass_top_left.png"
-				} else if y == h-1 {
-					img = "grass_bottom_left.png"
-				} else {
-					img = "grass_left.png"
-				}
-			} else if x == w-1 {
-				if y == 0 {
-					img = "grass_top_right.png"
-				} else if y == h-1 {
-					img = "grass_bottom_right.png"
-				} else {
-					img = "grass_right.png"
-				}
-			} else if y == 0 {
-				img = "grass_top.png"
-			} else if y == h-1 {
-				img = "grass_bottom.png"
-			}
-
-			g.Sprites.Add(x, y, img)
-		}
-	}
-
-	files.Save(g.Sprites)
-}
-
 func main() {
-	game := Game{}
+	game := Game{Player: entities.CreatePlayer(4, 3)}
 
-	game.Player = entities.CreatePlayer(4, 3)
+	game.Sprites = files.Load()
+	// files.Save(game.Sprites)
 
 	ebiten.SetWindowSize(constants.ScreenWidth, constants.ScreenHeight)
 	ebiten.SetWindowTitle("Game")
