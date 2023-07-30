@@ -9,7 +9,7 @@ type Player struct {
 	Sprite utils.Sprite
 }
 
-func CreatePlayer(x float64, y float64) Player {
+func CreatePlayer(x, y float64) Player {
 	return Player{utils.CreateSprite(x, y, "character.png")}
 }
 

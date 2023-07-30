@@ -23,7 +23,7 @@ func (sprite *Sprite) Draw(screen *ebiten.Image) {
 	screen.DrawImage(Images[sprite.ImagePath], options)
 }
 
-func (sprites *SpriteArray) Add(x float64, y float64, path string) {
+func (sprites *SpriteArray) Add(x, y float64, path string) {
 	new_sprite := CreateSprite(x, y, path)
 
 	for i := 0; i < len(*sprites); i++ {
@@ -34,6 +34,6 @@ func (sprites *SpriteArray) Add(x float64, y float64, path string) {
 	*sprites = append(*sprites, new_sprite)
 }
 
-func CreateSprite(x float64, y float64, path string) Sprite {
+func CreateSprite(x, y float64, path string) Sprite {
 	return Sprite{x, y, CreateImage(path)}
 }
