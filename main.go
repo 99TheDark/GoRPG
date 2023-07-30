@@ -2,26 +2,23 @@ package main
 
 import (
 	"game/constants"
+	"game/entities"
 	"game/files"
 	"game/utils"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
-type Player struct {
-	Sprite utils.Sprite
-}
-
 type Game struct {
-	Keys    []ebiten.Key
+	Keys    utils.Keyboard
 	Sprites utils.SpriteArray
-	Player  Player
+	Player  entities.Player
 }
 
 func (g *Game) Update() error {
-	g.Keys = inpututil.PressedKeys()
+	g.Keys.Update()
+
 	return nil
 }
 
@@ -77,7 +74,7 @@ func setup(g *Game) {
 func main() {
 	game := Game{}
 
-	game.Player = Player{utils.CreateSprite(4, 3, "character.png")}
+	game.Player = entities.CreatePlayer(4, 3)
 
 	ebiten.SetWindowSize(constants.ScreenWidth, constants.ScreenHeight)
 	ebiten.SetWindowTitle("Game")
