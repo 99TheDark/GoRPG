@@ -6,13 +6,17 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 var sprites utils.SpriteArray
 
-type Game struct{}
+type Game struct {
+	Keys []ebiten.Key
+}
 
 func (g *Game) Update() error {
+	g.Keys = inpututil.PressedKeys()
 	return nil
 }
 

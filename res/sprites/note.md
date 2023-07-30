@@ -1,0 +1,1 @@
+I feel like the legs look weird, and making her shorter seems to help, but still feels strange, especially with the head size.
