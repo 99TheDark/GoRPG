@@ -1,6 +1,7 @@
 package main
 
 import (
+	"game/constants"
 	"game/files"
 	"game/utils"
 	"log"
@@ -9,10 +10,14 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
-var sprites utils.SpriteArray
+type Player struct {
+	Sprite utils.Sprite
+}
 
 type Game struct {
-	Keys []ebiten.Key
+	Keys    []ebiten.Key
+	Sprites utils.SpriteArray
+	Player  Player
 }
 
 func (g *Game) Update() error {
@@ -21,17 +26,21 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	for i := 0; i < len(sprites); i++ {
-		sprites[i].Draw(screen)
+	for i := 0; i < len(g.Sprites); i++ {
+		g.Sprites[i].Draw(screen)
 	}
+	g.Player.Sprite.Draw(screen)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return 640, 480
+	setup(g)
+
+	return constants.ScreenWidth, constants.ScreenHeight
 }
 
-func init() {
+func setup(g *Game) {
 	// sprites = files.Load()
+
 	w, h := 8, 6
 	for y := 0; y < h; y++ {
 		for x := 0; x < w; x++ {
@@ -58,17 +67,21 @@ func init() {
 				img = "grass_bottom.png"
 			}
 
-			sprites.Add(x, y, img)
+			g.Sprites.Add(x, y, img)
 		}
 	}
 
-	files.Save(sprites)
+	files.Save(g.Sprites)
 }
 
 func main() {
-	ebiten.SetWindowSize(640, 480)
+	game := Game{}
+
+	game.Player = Player{utils.CreateSprite(4, 3, "character.png")}
+
+	ebiten.SetWindowSize(constants.ScreenWidth, constants.ScreenHeight)
 	ebiten.SetWindowTitle("Game")
-	if err := ebiten.RunGame(&Game{}); err != nil {
+	if err := ebiten.RunGame(&game); err != nil {
 		log.Fatal(err)
 	}
 }

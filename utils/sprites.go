@@ -12,7 +12,7 @@ type Sprite struct {
 	ImagePath string
 }
 
-type SpriteArray []*Sprite
+type SpriteArray []Sprite
 
 func (sprite *Sprite) Draw(screen *ebiten.Image) {
 	options := &ebiten.DrawImageOptions{}
@@ -24,12 +24,16 @@ func (sprite *Sprite) Draw(screen *ebiten.Image) {
 }
 
 func (sprites *SpriteArray) Add(x int, y int, path string) {
-	new_sprite := Sprite{x, y, createImage(path)}
+	new_sprite := CreateSprite(x, y, path)
 
 	for i := 0; i < len(*sprites); i++ {
-		if *(*sprites)[i] == new_sprite {
+		if (*sprites)[i] == new_sprite {
 			return
 		}
 	}
-	*sprites = append(*sprites, &new_sprite)
+	*sprites = append(*sprites, new_sprite)
+}
+
+func CreateSprite(x int, y int, path string) Sprite {
+	return Sprite{x, y, CreateImage(path)}
 }
