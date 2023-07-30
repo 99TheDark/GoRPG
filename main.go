@@ -18,6 +18,7 @@ type Game struct {
 
 func (g *Game) Update() error {
 	g.Keys.Update()
+	g.Player.Update(&g.Keys)
 
 	return nil
 }

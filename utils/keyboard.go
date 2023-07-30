@@ -6,16 +6,16 @@ import (
 )
 
 type Keyboard struct {
-	keys []ebiten.Key
+	Keys []ebiten.Key
 }
 
 func (k *Keyboard) Update() {
-	k.keys = inpututil.PressedKeys()
+	k.Keys = inpututil.PressedKeys()
 }
 
 func (k *Keyboard) Down(key string) bool {
-	for i := 0; i < len(k.keys); i++ {
-		if k.keys[i].String() == key {
+	for i := 0; i < len(k.Keys); i++ {
+		if k.Keys[i].String() == key {
 			return true
 		}
 	}
