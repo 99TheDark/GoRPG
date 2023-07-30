@@ -1,1 +1,3 @@
-I feel like the legs look weird, and making her shorter seems to help, but still feels strange, especially with the head size.
+Basically copied Link's sprite from The Legend of Zelda: Four Swords Adventures, feet look a little weird, so do the hands.
+Temporary, as the last sprite was god awful.
+Maybe also thin entire body by 1px from each side?
