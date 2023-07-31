@@ -7,9 +7,9 @@ type Camera struct {
 }
 
 func CreateCamera(anchor Player) Camera {
-	return Camera{anchor.Sprite.X, anchor.Sprite.Y, anchor}
+	return Camera{anchor.Pos.X, anchor.Pos.Y, anchor}
 }
 
 func (cam *Camera) Update() {
-	cam.X, cam.Y = cam.Anchor.Sprite.X, cam.Anchor.Sprite.Y
+	cam.X, cam.Y = cam.Anchor.Pos.X, cam.Anchor.Pos.Y
 }

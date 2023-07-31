@@ -2,14 +2,14 @@ package files
 
 import (
 	"encoding/json"
-	"game/utils"
+	"game/top"
 	"log"
 )
 
-func Save(sprites utils.SpriteArray) {
-	var json_sprites []utils.SpriteJSON
-	for _, s := range sprites {
-		json_sprites = append(json_sprites, utils.SpriteToJSON(s))
+func Save(world top.World) {
+	var json_sprites []top.TileJSON
+	for _, tile := range world {
+		json_sprites = append(json_sprites, top.TileToJSON(*tile))
 	}
 
 	file, err := json.Marshal(json_sprites)

@@ -14,10 +14,10 @@ import (
 )
 
 type Game struct {
-	Keys    top.Keyboard
-	Sprites utils.SpriteArray
-	Player  top.Player
-	Camera  top.Camera
+	Keys   top.Keyboard
+	World  top.World
+	Player top.Player
+	Camera top.Camera
 }
 
 func (g *Game) Update() error {
@@ -38,10 +38,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	screen.Fill(color.RGBA{78, 150, 199, 255})
 
-	for i := 0; i < len(g.Sprites); i++ {
-		g.Sprites[i].Draw(screen, *options)
+	for _, tile := range g.World {
+		tile.Draw(screen, *options)
 	}
-	g.Player.Sprite.Draw(screen, *options)
+	g.Player.Draw(screen, *options)
 
 	ebitenutil.DebugPrint(screen, strconv.FormatInt(int64(ebiten.ActualFPS()), 10))
 }
@@ -51,17 +51,17 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 }
 
 func main() {
-	sprites := files.Load()
+	world := files.Load()
 	player := top.CreatePlayer(3, 3)
 	camera := top.CreateCamera(player)
 
-	game := Game{Sprites: sprites, Player: player, Camera: camera}
-
-	// files.Save(game.Sprites)
+	game := Game{World: world, Player: player, Camera: camera}
 
 	ebiten.SetWindowSize(constants.ScreenWidth, constants.ScreenHeight)
 	ebiten.SetWindowTitle("GoRPG")
 	if err := ebiten.RunGame(&game); err != nil {
 		log.Fatal(err)
 	}
+
+	files.Save(game.World)
 }

@@ -3,22 +3,22 @@ package files
 import (
 	"encoding/json"
 	"game/constants"
-	"game/utils"
+	"game/top"
 	"log"
 )
 
-func Load() utils.SpriteArray {
-	var json_sprites []utils.SpriteJSON
+func Load() top.World {
+	var json_sprites []top.TileJSON
 
 	err := json.Unmarshal(ReadFile(constants.MapLocation), &json_sprites)
 	if err != nil {
 		log.Fatal(json_sprites)
 	}
 
-	sprites := utils.SpriteArray{}
+	sprites := top.World{}
 	for _, json_sprite := range json_sprites {
-		s := utils.SpriteFromJSON(json_sprite)
-		sprites = append(sprites, s)
+		tile := top.TileFromJSON(json_sprite)
+		sprites = append(sprites, &tile)
 	}
 
 	return sprites

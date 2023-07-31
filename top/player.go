@@ -9,6 +9,7 @@ import (
 )
 
 type Player struct {
+	Pos       *utils.Point
 	Last      *utils.Point
 	Sprite    *utils.Sprite
 	Direction constants.Direction
@@ -16,7 +17,13 @@ type Player struct {
 }
 
 func CreatePlayer(x, y float64) Player {
-	return Player{utils.CreatePoint(x, y), utils.CreateSprite(x, y, "character/down_1.png"), constants.Down, false}
+	return Player{
+		utils.CreatePoint(x, y),
+		utils.CreatePoint(x, y),
+		utils.CreateSprite("character/down_1.png"),
+		constants.Down,
+		false,
+	}
 }
 
 func (p *Player) Update(keys *Keyboard) {
@@ -45,21 +52,25 @@ func (p *Player) Update(keys *Keyboard) {
 		for _, dir := range p.Direction.Deconstruct() {
 			switch dir {
 			case constants.Up:
-				p.Sprite.Y -= constants.PlayerSpeed
+				p.Pos.Y -= constants.PlayerSpeed
 			case constants.Down:
-				p.Sprite.Y += constants.PlayerSpeed
+				p.Pos.Y += constants.PlayerSpeed
 			case constants.Left:
-				p.Sprite.X -= constants.PlayerSpeed
+				p.Pos.X -= constants.PlayerSpeed
 			case constants.Right:
-				p.Sprite.X += constants.PlayerSpeed
+				p.Pos.X += constants.PlayerSpeed
 			}
 		}
 
-		dx, dy := p.Sprite.X-p.Last.X, p.Sprite.Y-p.Last.Y
+		dx, dy := p.Pos.X-p.Last.X, p.Pos.Y-p.Last.Y
 		if math.Abs(dx) >= 1 || math.Abs(dy) >= 1 {
-			p.Sprite.X, p.Sprite.Y = p.Last.X+utils.Normalize(dx), p.Last.Y+utils.Normalize(dy)
-			p.Last.X, p.Last.Y = p.Sprite.X, p.Sprite.Y
+			p.Pos.X, p.Pos.Y = p.Last.X+utils.Normalize(dx), p.Last.Y+utils.Normalize(dy)
+			p.Last.X, p.Last.Y = p.Pos.X, p.Pos.Y
 			p.Moving = false
 		}
 	}
+}
+
+func (p *Player) Draw(screen *ebiten.Image, options ebiten.DrawImageOptions) {
+	p.Sprite.Draw(screen, options, p.Pos.X, p.Pos.Y)
 }
