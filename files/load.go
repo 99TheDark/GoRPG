@@ -13,8 +13,5 @@ func Load() utils.SpriteArray {
 		log.Fatal(err)
 	}
 
-	for i := 0; i < len(sprites); i++ {
-		utils.CreateImage(sprites[i].ImagePath)
-	}
 	return sprites
 }

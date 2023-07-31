@@ -7,11 +7,11 @@ import (
 )
 
 type Sprite struct {
-	X         float64
-	Y         float64
-	Width     int
-	Height    int
-	ImagePath string
+	X      float64
+	Y      float64
+	Width  int
+	Height int
+	Image  *ebiten.Image
 }
 
 type SpriteArray []Sprite
@@ -22,7 +22,7 @@ func (sprite *Sprite) Draw(screen *ebiten.Image) {
 	options.GeoM.Translate(sprite.X*constants.TileSizeFloat, sprite.Y*constants.TileSizeFloat)
 	options.GeoM.Scale(constants.Scale, constants.Scale)
 
-	screen.DrawImage(Images[sprite.ImagePath], options)
+	screen.DrawImage(sprite.Image, options)
 }
 
 func (sprites *SpriteArray) Add(x, y float64, path string) {
@@ -37,5 +37,10 @@ func (sprites *SpriteArray) Add(x, y float64, path string) {
 }
 
 func CreateSprite(x, y float64, path string) Sprite {
-	return Sprite{x, y, 0, 0, CreateImage(path)}
+	img := CreateImage(path)
+	width, height := img.Size()
+
+	return Sprite{x, y, width, height, img}
 }
+
+// func (*)

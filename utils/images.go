@@ -9,13 +9,19 @@ import (
 
 var Images = map[string]*ebiten.Image{}
 
-func CreateImage(path string) string {
-	img, _, err := ebitenutil.NewImageFromFile("res/sprites/" + path)
+func CreateImage(path string) *ebiten.Image {
+	cachedImage, exists := Images[path]
 
-	if err != nil {
-		log.Fatal(err)
+	if exists {
+		img, _, err := ebitenutil.NewImageFromFile("res/sprites/" + path)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		Images[path] = img
+		return img
+	} else {
+		return cachedImage
 	}
-
-	Images[path] = img
-	return path
 }
