@@ -35,14 +35,14 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 }
 
 func main() {
-	game := Game{Player: entities.CreatePlayer(4, 3)}
+	game := Game{Sprites: files.Load(), Player: entities.CreatePlayer(4, 3)}
 
-	game.Sprites = files.Load()
 	// files.Save(game.Sprites)
 
 	ebiten.SetWindowSize(constants.ScreenWidth, constants.ScreenHeight)
-	ebiten.SetWindowTitle("Game")
+	ebiten.SetWindowTitle("GoRPG")
 	if err := ebiten.RunGame(&game); err != nil {
 		log.Fatal(err)
 	}
+
 }

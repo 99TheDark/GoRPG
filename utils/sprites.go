@@ -11,7 +11,14 @@ type Sprite struct {
 	Y      float64
 	Width  int
 	Height int
+	Path   string
 	Image  *ebiten.Image
+}
+
+type SpriteJSON struct {
+	X    float64 `json:"x"`
+	Y    float64 `json:"y"`
+	Path string  `json:"path"`
 }
 
 type SpriteArray []Sprite
@@ -36,11 +43,17 @@ func (sprites *SpriteArray) Add(x, y float64, path string) {
 	*sprites = append(*sprites, new_sprite)
 }
 
+func SpriteToJSON(sprite Sprite) SpriteJSON {
+	return SpriteJSON{sprite.X, sprite.Y, sprite.Path}
+}
+
+func SpriteFromJSON(json SpriteJSON) Sprite {
+	return CreateSprite(json.X, json.Y, json.Path)
+}
+
 func CreateSprite(x, y float64, path string) Sprite {
 	img := CreateImage(path)
 	width, height := img.Size()
 
-	return Sprite{x, y, width, height, img}
+	return Sprite{x, y, width, height, path, img}
 }
-
-// func (*)

@@ -12,7 +12,7 @@ var Images = map[string]*ebiten.Image{}
 func CreateImage(path string) *ebiten.Image {
 	cachedImage, exists := Images[path]
 
-	if exists {
+	if !exists {
 		img, _, err := ebitenutil.NewImageFromFile("res/sprites/" + path)
 
 		if err != nil {

@@ -9,19 +9,19 @@ type Keyboard struct {
 	Keys []ebiten.Key
 }
 
-func (k *Keyboard) Update() {
-	k.Keys = inpututil.PressedKeys()
+func (keyboard *Keyboard) Update() {
+	keyboard.Keys = inpututil.PressedKeys()
 }
 
-func (k *Keyboard) Down(key string) bool {
-	for i := 0; i < len(k.Keys); i++ {
-		if k.Keys[i].String() == key {
+func (keyboard *Keyboard) Down(key string) bool {
+	for i := 0; i < len(keyboard.Keys); i++ {
+		if keyboard.Keys[i].String() == key {
 			return true
 		}
 	}
 	return false
 }
 
-func (k *Keyboard) Up(key string) bool {
-	return !k.Down(key)
+func (keyboard *Keyboard) Up(key string) bool {
+	return !keyboard.Down(key)
 }
