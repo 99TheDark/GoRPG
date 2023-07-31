@@ -26,7 +26,7 @@ type SpriteArray []Sprite
 func (sprite *Sprite) Draw(screen *ebiten.Image) {
 	options := &ebiten.DrawImageOptions{}
 
-	options.GeoM.Translate(sprite.X*constants.TileSizeFloat, sprite.Y*constants.TileSizeFloat)
+	options.GeoM.Translate(sprite.X*constants.TileSizeFloat, (sprite.Y+1)*constants.TileSizeFloat-float64(sprite.Height))
 	options.GeoM.Scale(constants.Scale, constants.Scale)
 
 	screen.DrawImage(sprite.Image, options)

@@ -30,5 +30,5 @@ func (p *Player) Update(keys *utils.Keyboard) {
 	}
 
 	utils.Clamp(&p.Sprite.X, 0, 7)
-	utils.Clamp(&p.Sprite.Y, -1, 4)
+	utils.Clamp(&p.Sprite.Y, 0, 5)
 }
