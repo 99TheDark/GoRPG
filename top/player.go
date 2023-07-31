@@ -1,4 +1,4 @@
-package entities
+package top
 
 import (
 	"game/constants"
@@ -15,7 +15,7 @@ func CreatePlayer(x, y float64) Player {
 	return Player{utils.CreateSprite(x, y, "character.png"), constants.Down, false}
 }
 
-func (p *Player) Update(keys *utils.Keyboard) {
+func (p *Player) Update(keys *Keyboard) {
 	if keys.Down("W") {
 		p.Sprite.Y -= constants.PlayerSpeed
 	}

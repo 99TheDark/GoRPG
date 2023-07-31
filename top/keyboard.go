@@ -1,4 +1,4 @@
-package utils
+package top
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"

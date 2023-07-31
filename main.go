@@ -2,8 +2,8 @@ package main
 
 import (
 	"game/constants"
-	"game/entities"
 	"game/files"
+	"game/top"
 	"game/utils"
 	"image/color"
 	"log"
@@ -12,9 +12,9 @@ import (
 )
 
 type Game struct {
-	Keys    utils.Keyboard
+	Keys    top.Keyboard
 	Sprites utils.SpriteArray
-	Player  entities.Player
+	Player  top.Player
 }
 
 func (g *Game) Update() error {
@@ -38,7 +38,7 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 }
 
 func main() {
-	game := Game{Sprites: files.Load(), Player: entities.CreatePlayer(4, 3)}
+	game := Game{Sprites: files.Load(), Player: top.CreatePlayer(4, 3)}
 
 	// files.Save(game.Sprites)
 
