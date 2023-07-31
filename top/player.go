@@ -38,7 +38,18 @@ func (p *Player) Update(keys *Keyboard) {
 			p.Direction, p.Moving = dir, true
 		}
 	} else {
-
+		for _, dir := range p.Direction.Deconstruct() {
+			switch dir {
+			case constants.Up:
+				p.Sprite.Y -= constants.PlayerSpeed
+			case constants.Down:
+				p.Sprite.Y += constants.PlayerSpeed
+			case constants.Left:
+				p.Sprite.X -= constants.PlayerSpeed
+			case constants.Right:
+				p.Sprite.X += constants.PlayerSpeed
+			}
+		}
 	}
 
 	utils.Clamp(&p.Sprite.X, 0, 7)

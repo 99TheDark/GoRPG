@@ -75,6 +75,22 @@ func (dir Direction) Opposite() Direction {
 	return NoDirection
 }
 
+func (dir Direction) Deconstruct() []Direction {
+	if dir.TwoDirectional() {
+		switch dir {
+		case UpLeft:
+			return []Direction{Up, Left}
+		case DownLeft:
+			return []Direction{Down, Left}
+		case UpRight:
+			return []Direction{Up, Right}
+		case DownRight:
+			return []Direction{Down, Right}
+		}
+	}
+	return []Direction{dir}
+}
+
 func (dir Direction) String() string {
 	switch dir {
 	case Up:
