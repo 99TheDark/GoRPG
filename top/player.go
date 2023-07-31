@@ -10,7 +10,7 @@ import (
 type Player struct {
 	Sprite    *utils.Sprite
 	Direction constants.Direction
-	Walking   bool
+	Moving    bool
 }
 
 func CreatePlayer(x, y float64) Player {
@@ -18,19 +18,27 @@ func CreatePlayer(x, y float64) Player {
 }
 
 func (p *Player) Update(keys *Keyboard) {
-	var dir constants.Direction = constants.NoDirection
+	if !p.Moving {
+		dir, move := constants.NoDirection, false
 
-	for _, key := range keys.Keys {
-		switch key {
-		case ebiten.KeyW:
-			dir = dir.Combine(constants.Up)
-		case ebiten.KeyS:
-			dir = dir.Combine(constants.Down)
-		case ebiten.KeyA:
-			dir = dir.Combine(constants.Left)
-		case ebiten.KeyD:
-			dir = dir.Combine(constants.Right)
+		for _, key := range keys.Keys {
+			switch key {
+			case ebiten.KeyW:
+				dir, move = dir.Combine(constants.Up), true
+			case ebiten.KeyS:
+				dir, move = dir.Combine(constants.Down), true
+			case ebiten.KeyA:
+				dir, move = dir.Combine(constants.Left), true
+			case ebiten.KeyD:
+				dir, move = dir.Combine(constants.Right), true
+			}
 		}
+
+		if move {
+			p.Direction, p.Moving = dir, true
+		}
+	} else {
+
 	}
 
 	utils.Clamp(&p.Sprite.X, 0, 7)
