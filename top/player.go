@@ -3,6 +3,8 @@ package top
 import (
 	"game/constants"
 	"game/utils"
+
+	"github.com/hajimehoshi/ebiten/v2"
 )
 
 type Player struct {
@@ -19,14 +21,14 @@ func (p *Player) Update(keys *Keyboard) {
 	var dir constants.Direction = constants.NoDirection
 
 	for _, key := range keys.Keys {
-		switch key.String() {
-		case "W":
+		switch key {
+		case ebiten.KeyW:
 			dir = dir.Combine(constants.Up)
-		case "S":
+		case ebiten.KeyS:
 			dir = dir.Combine(constants.Down)
-		case "A":
+		case ebiten.KeyA:
 			dir = dir.Combine(constants.Left)
-		case "D":
+		case ebiten.KeyD:
 			dir = dir.Combine(constants.Right)
 		}
 	}

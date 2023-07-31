@@ -1,6 +1,8 @@
 package top
 
 import (
+	"game/utils"
+
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
@@ -10,7 +12,10 @@ type Keyboard struct {
 }
 
 func (keyboard *Keyboard) Update() {
-	keyboard.Keys = inpututil.PressedKeys()
+	keyboard.Keys = inpututil.AppendJustPressedKeys(keyboard.Keys)
+	for _, el := range inpututil.AppendJustReleasedKeys([]ebiten.Key{}) {
+		keyboard.Keys = utils.Remove(keyboard.Keys, utils.IndexOf(keyboard.Keys, el))
+	}
 }
 
 func (keyboard *Keyboard) Down(key string) bool {
