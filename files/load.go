@@ -8,7 +8,7 @@ import (
 )
 
 func Load() utils.SpriteArray {
-	var json_sprites []*utils.SpriteJSON
+	var json_sprites []utils.SpriteJSON
 
 	err := json.Unmarshal(ReadFile(constants.MapLocation), &json_sprites)
 	if err != nil {
@@ -17,7 +17,7 @@ func Load() utils.SpriteArray {
 
 	sprites := utils.SpriteArray{}
 	for _, json_sprite := range json_sprites {
-		s := utils.SpriteFromJSON(*json_sprite)
+		s := utils.SpriteFromJSON(json_sprite)
 		sprites = append(sprites, s)
 	}
 
