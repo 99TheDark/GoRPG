@@ -5,6 +5,7 @@ import (
 	"game/entities"
 	"game/files"
 	"game/utils"
+	"image/color"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -24,6 +25,8 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
+	screen.Fill(color.RGBA{78, 150, 199, 255})
+
 	for i := 0; i < len(g.Sprites); i++ {
 		g.Sprites[i].Draw(screen)
 	}
