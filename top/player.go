@@ -3,11 +3,9 @@ package top
 import (
 	"game/constants"
 	"game/utils"
-	"log"
 	"math"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
 type Player struct {
@@ -81,11 +79,8 @@ func (p *Player) Update(keys *Keyboard) {
 		anim := constants.PlayerAnimation[p.Direction]
 		frame := int(math.Floor(delta * float64(len(anim))))
 
-		var err error
-		p.Sprite.Image, _, err = ebitenutil.NewImageFromFile("res/sprites/" + anim[frame])
-		if err != nil {
-			log.Fatal(err)
-		}
+		p.Sprite.Image = utils.CreateImage(anim[frame])
+
 	}
 }
 
