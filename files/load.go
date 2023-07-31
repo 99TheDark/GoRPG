@@ -18,7 +18,7 @@ func Load() utils.SpriteArray {
 	sprites := utils.SpriteArray{}
 	for _, json_sprite := range json_sprites {
 		s := utils.SpriteFromJSON(json_sprite)
-		sprites = append(sprites, *s)
+		sprites = append(sprites, s)
 	}
 
 	return sprites

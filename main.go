@@ -14,7 +14,7 @@ import (
 type Game struct {
 	Keys    top.Keyboard
 	Sprites utils.SpriteArray
-	Player  *top.Player
+	Player  top.Player
 	Camera  top.Camera
 }
 
@@ -49,9 +49,9 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 func main() {
 	sprites := files.Load()
 	player := top.CreatePlayer(3, 3)
-	camera := top.CreateCamera(&player)
+	camera := top.CreateCamera(player)
 
-	game := Game{Sprites: sprites, Player: &player, Camera: camera}
+	game := Game{Sprites: sprites, Player: player, Camera: camera}
 
 	// files.Save(game.Sprites)
 

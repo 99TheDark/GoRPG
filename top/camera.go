@@ -3,10 +3,10 @@ package top
 type Camera struct {
 	X      float64
 	Y      float64
-	Anchor *Player
+	Anchor Player
 }
 
-func CreateCamera(anchor *Player) Camera {
+func CreateCamera(anchor Player) Camera {
 	return Camera{anchor.Sprite.X, anchor.Sprite.Y, anchor}
 }
 

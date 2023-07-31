@@ -31,22 +31,22 @@ func (sprite *Sprite) Draw(screen *ebiten.Image, options ebiten.DrawImageOptions
 }
 
 func (sprites *SpriteArray) Add(x, y float64, path string) {
-	new_sprite := CreateSprite(x, y, path)
+	new_sprite := *CreateSprite(x, y, path)
 
 	for i := 0; i < len(*sprites); i++ {
-		if (*sprites)[i] == *new_sprite {
+		if (*sprites)[i] == new_sprite {
 			return
 		}
 	}
-	*sprites = append(*sprites, *new_sprite)
+	*sprites = append(*sprites, new_sprite)
 }
 
-func SpriteToJSON(sprite *Sprite) SpriteJSON {
+func SpriteToJSON(sprite Sprite) SpriteJSON {
 	return SpriteJSON{sprite.X, sprite.Y, sprite.Path}
 }
 
-func SpriteFromJSON(json SpriteJSON) *Sprite {
-	return CreateSprite(json.X, json.Y, json.Path)
+func SpriteFromJSON(json SpriteJSON) Sprite {
+	return *CreateSprite(json.X, json.Y, json.Path)
 }
 
 func CreateSprite(x, y float64, path string) *Sprite {
