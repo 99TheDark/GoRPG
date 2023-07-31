@@ -16,17 +16,19 @@ func CreatePlayer(x, y float64) Player {
 }
 
 func (p *Player) Update(keys *Keyboard) {
-	if keys.Down("W") {
-		p.Sprite.Y -= constants.PlayerSpeed
-	}
-	if keys.Down("S") {
-		p.Sprite.Y += constants.PlayerSpeed
-	}
-	if keys.Down("A") {
-		p.Sprite.X -= constants.PlayerSpeed
-	}
-	if keys.Down("D") {
-		p.Sprite.X += constants.PlayerSpeed
+	var dir constants.Direction = constants.NoDirection
+
+	for _, key := range keys.Keys {
+		switch key.String() {
+		case "W":
+			dir = dir.Combine(constants.Up)
+		case "S":
+			dir = dir.Combine(constants.Down)
+		case "A":
+			dir = dir.Combine(constants.Left)
+		case "D":
+			dir = dir.Combine(constants.Right)
+		}
 	}
 
 	utils.Clamp(&p.Sprite.X, 0, 7)
