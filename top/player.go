@@ -16,7 +16,7 @@ type Player struct {
 }
 
 func CreatePlayer(x, y float64) Player {
-	return Player{utils.CreatePoint(x, y), utils.CreateSprite(x, y, "character.png"), constants.Down, false}
+	return Player{utils.CreatePoint(x, y), utils.CreateSprite(x, y, "character/down_1.png"), constants.Down, false}
 }
 
 func (p *Player) Update(keys *Keyboard) {
