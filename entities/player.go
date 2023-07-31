@@ -6,11 +6,13 @@ import (
 )
 
 type Player struct {
-	Sprite utils.Sprite
+	Sprite    utils.Sprite
+	Direction constants.Direction
+	Walking   bool
 }
 
 func CreatePlayer(x, y float64) Player {
-	return Player{utils.CreateSprite(x, y, "character.png")}
+	return Player{utils.CreateSprite(x, y, "character.png"), constants.Down, false}
 }
 
 func (p *Player) Update(keys *utils.Keyboard) {
