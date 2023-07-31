@@ -9,6 +9,8 @@ import (
 type Sprite struct {
 	X         float64
 	Y         float64
+	Width     int
+	Height    int
 	ImagePath string
 }
 
@@ -35,5 +37,5 @@ func (sprites *SpriteArray) Add(x, y float64, path string) {
 }
 
 func CreateSprite(x, y float64, path string) Sprite {
-	return Sprite{x, y, CreateImage(path)}
+	return Sprite{x, y, 0, 0, CreateImage(path)}
 }
