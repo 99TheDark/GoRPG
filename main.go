@@ -7,8 +7,10 @@ import (
 	"game/utils"
 	"image/color"
 	"log"
+	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
 type Game struct {
@@ -40,6 +42,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.Sprites[i].Draw(screen, *options)
 	}
 	g.Player.Sprite.Draw(screen, *options)
+
+	ebitenutil.DebugPrint(screen, strconv.FormatInt(int64(ebiten.ActualFPS()), 10))
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {

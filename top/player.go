@@ -3,18 +3,20 @@ package top
 import (
 	"game/constants"
 	"game/utils"
+	"math"
 
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
 type Player struct {
+	Last      *utils.Point
 	Sprite    *utils.Sprite
 	Direction constants.Direction
 	Moving    bool
 }
 
 func CreatePlayer(x, y float64) Player {
-	return Player{utils.CreateSprite(x, y, "character.png"), constants.Down, false}
+	return Player{utils.CreatePoint(x, y), utils.CreateSprite(x, y, "character.png"), constants.Down, false}
 }
 
 func (p *Player) Update(keys *Keyboard) {
@@ -50,8 +52,17 @@ func (p *Player) Update(keys *Keyboard) {
 				p.Sprite.X += constants.PlayerSpeed
 			}
 		}
+
+		dx, dy := p.Sprite.X-p.Last.X, p.Sprite.Y-p.Last.Y
+		if math.Abs(dx) >= 1 || math.Abs(dy) >= 1 {
+			p.Sprite.X, p.Sprite.Y = p.Last.X+utils.Normalize(dx), p.Last.Y+utils.Normalize(dy)
+			p.Last.X, p.Last.Y = p.Sprite.X, p.Sprite.Y
+			p.Moving = false
+		}
 	}
 
-	utils.Clamp(&p.Sprite.X, 0, 7)
-	utils.Clamp(&p.Sprite.Y, 0, 5)
+	stopped := utils.Clamp(&p.Sprite.X, 0, 7) || utils.Clamp(&p.Sprite.Y, 0, 5)
+	if stopped {
+		p.Moving = false
+	}
 }
