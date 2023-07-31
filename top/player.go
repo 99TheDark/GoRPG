@@ -6,7 +6,7 @@ import (
 )
 
 type Player struct {
-	Sprite    utils.Sprite
+	Sprite    *utils.Sprite
 	Direction constants.Direction
 	Walking   bool
 }
