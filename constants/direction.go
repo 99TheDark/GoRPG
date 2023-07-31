@@ -45,7 +45,8 @@ func (dir Direction) Combine(next Direction) Direction {
 			}
 		}
 	}
-	return NoDirection
+
+	return dir
 }
 
 func (dir Direction) TwoDirectional() bool {

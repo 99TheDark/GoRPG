@@ -39,7 +39,9 @@ func (p *Player) Update(keys *Keyboard) {
 		if move {
 			p.Direction, p.Moving = dir, true
 		}
-	} else {
+	}
+
+	if p.Moving {
 		for _, dir := range p.Direction.Deconstruct() {
 			switch dir {
 			case constants.Up:
@@ -59,10 +61,5 @@ func (p *Player) Update(keys *Keyboard) {
 			p.Last.X, p.Last.Y = p.Sprite.X, p.Sprite.Y
 			p.Moving = false
 		}
-	}
-
-	stopped := utils.Clamp(&p.Sprite.X, 0, 7) || utils.Clamp(&p.Sprite.Y, 0, 5)
-	if stopped {
-		p.Moving = false
 	}
 }
