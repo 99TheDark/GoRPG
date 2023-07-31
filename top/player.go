@@ -3,9 +3,11 @@ package top
 import (
 	"game/constants"
 	"game/utils"
+	"log"
 	"math"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
 type Player struct {
@@ -24,6 +26,10 @@ func CreatePlayer(x, y float64) Player {
 		constants.Down,
 		false,
 	}
+}
+
+func (p Player) Delta() (float64, float64) {
+	return p.Pos.X - p.Last.X, p.Pos.Y - p.Last.Y
 }
 
 func (p *Player) Update(keys *Keyboard) {
@@ -62,11 +68,23 @@ func (p *Player) Update(keys *Keyboard) {
 			}
 		}
 
-		dx, dy := p.Pos.X-p.Last.X, p.Pos.Y-p.Last.Y
+		dx, dy := p.Delta()
 		if math.Abs(dx) >= 1 || math.Abs(dy) >= 1 {
 			p.Pos.X, p.Pos.Y = p.Last.X+utils.Normalize(dx), p.Last.Y+utils.Normalize(dy)
 			p.Last.X, p.Last.Y = p.Pos.X, p.Pos.Y
+
 			p.Moving = false
+			dx, dy = 0, 0
+		}
+
+		delta := math.Max(math.Abs(dx), math.Abs(dy))
+		anim := constants.PlayerAnimation[p.Direction]
+		frame := int(math.Floor(delta * float64(len(anim))))
+
+		var err error
+		p.Sprite.Image, _, err = ebitenutil.NewImageFromFile("res/sprites/" + anim[frame])
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 }
