@@ -39,13 +39,13 @@ func (world *World) Blocked(pos *utils.Point, dir constants.Direction) bool {
 	case constants.Right:
 		return world.Solid(pos.X+1, pos.Y)
 	case constants.UpLeft:
-		return world.Solid(pos.X, pos.Y-1) && world.Solid(pos.X-1, pos.Y)
+		return world.Solid(pos.X, pos.Y-1) || world.Solid(pos.X-1, pos.Y) || world.Solid(pos.X-1, pos.Y-1)
 	case constants.DownLeft:
-		return world.Solid(pos.X, pos.Y+1) && world.Solid(pos.X-1, pos.Y)
+		return world.Solid(pos.X, pos.Y+1) || world.Solid(pos.X-1, pos.Y) || world.Solid(pos.X-1, pos.Y+1)
 	case constants.UpRight:
-		return world.Solid(pos.X, pos.Y-1) && world.Solid(pos.X+1, pos.Y)
+		return world.Solid(pos.X, pos.Y-1) || world.Solid(pos.X+1, pos.Y) || world.Solid(pos.X+1, pos.Y-1)
 	case constants.DownRight:
-		return world.Solid(pos.X, pos.Y+1) && world.Solid(pos.X+1, pos.Y)
+		return world.Solid(pos.X, pos.Y+1) || world.Solid(pos.X+1, pos.Y) || world.Solid(pos.X+1, pos.Y+1)
 	}
 	return true
 }
