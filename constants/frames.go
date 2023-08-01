@@ -1,11 +1,11 @@
 package constants
 
-// Only down sprites right now, so all animations will be downwards
+// All non-completed animations will be the down animation for now.
 var PlayerAnimation = map[Direction]([]string){
 	Up: []string{
-		"olivia/down_1.png",
-		"olivia/down_2.png",
-		"olivia/down_3.png",
+		"olivia/up_1.png",
+		"olivia/up_2.png",
+		"olivia/up_3.png",
 	},
 	Down: []string{
 		"olivia/down_1.png",
