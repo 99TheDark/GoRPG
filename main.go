@@ -50,6 +50,15 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 	return constants.ScreenWidth, constants.ScreenHeight
 }
 
+func init() {
+	// Preload images
+	for _, frames := range constants.PlayerAnimation {
+		for _, path := range frames {
+			utils.CreateImage(path)
+		}
+	}
+}
+
 func main() {
 	world := files.Load()
 	player := top.CreatePlayer(3, 3)
