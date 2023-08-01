@@ -28,9 +28,9 @@ var PlayerAnimation = map[Direction]([]string){
 		"character/down_3.png",
 	},
 	DownLeft: []string{
-		"character/down_1.png",
-		"character/down_2.png",
-		"character/down_3.png",
+		"character/down_left_1.png",
+		"character/down_left_2.png",
+		"character/down_left_3.png",
 	},
 	UpRight: []string{
 		"character/down_1.png",
