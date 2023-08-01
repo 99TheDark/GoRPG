@@ -20,7 +20,7 @@ func CreatePlayer(x, y float64) Player {
 	return Player{
 		utils.CreatePoint(x, y),
 		utils.CreatePoint(x, y),
-		utils.CreateSprite("character/down_1.png"),
+		utils.CreateSprite("olivia/down_1.png"),
 		constants.Down,
 		false,
 	}
