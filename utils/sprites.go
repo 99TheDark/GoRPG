@@ -24,5 +24,10 @@ func CreateSprite(path string) *Sprite {
 	img := CreateImage(path)
 	width, height := img.Size()
 
-	return &Sprite{width, height, path, img}
+	return &Sprite{
+		width,
+		height,
+		path,
+		img,
+	}
 }

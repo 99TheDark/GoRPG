@@ -61,7 +61,7 @@ func init() {
 
 func main() {
 	world := files.Load()
-	player := top.CreatePlayer(3, 3)
+	player := top.CreatePlayer(3, 3, &world)
 	camera := top.CreateCamera(player)
 
 	game := Game{World: world, Player: player, Camera: camera}
