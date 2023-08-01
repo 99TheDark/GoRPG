@@ -1,14 +1,15 @@
 package top
 
 import (
+	"game/connections"
 	"game/constants"
 	"game/utils"
 )
 
 type World []*Tile
 
-func (world *World) Add(x, y float64, path string) {
-	new_tile := CreateTile(x, y, path)
+func (world *World) Add(x, y float64, tiletype constants.TileType, variation connections.Variation) {
+	new_tile := CreateTile(x, y, tiletype, variation)
 	for _, tile := range *world {
 		if tile == new_tile {
 			return
@@ -21,7 +22,7 @@ func (world *World) Add(x, y float64, path string) {
 func (world *World) Solid(x, y float64) bool {
 	for _, tile := range *world {
 		if tile.Pos.X == x && tile.Pos.Y == y {
-			return true
+			return tile.Type.Solid()
 		}
 	}
 	return false

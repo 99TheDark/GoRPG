@@ -1,8 +1,20 @@
 package constants
 
-type Tile int
+type TileType string
 
 const (
-	Grass Tile = iota
-	Crate
+	Grass TileType = "grass"
+	Crate TileType = "crate"
 )
+
+func (tiletype TileType) Solid() bool {
+	switch tiletype {
+	case Crate:
+		return true
+	}
+	return false
+}
+
+func (tiletype TileType) String() string {
+	return string(tiletype)
+}

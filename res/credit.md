@@ -1,4 +1,4 @@
 # Credits
-- Art Inspiration
-    - https://www.artstation.com/artwork/NGLn55
-    - The Legend of Zelda: Four Swords Adventures
+- Inspiration
+    - Art Style: https://www.artstation.com/artwork/NGLn55
+    - Olivia Front Sprite: The Legend of Zelda: Four Swords Adventures
