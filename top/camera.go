@@ -6,8 +6,8 @@ type Camera struct {
 	Anchor Player
 }
 
-func CreateCamera(anchor Player) Camera {
-	return Camera{anchor.Pos.X, anchor.Pos.Y, anchor}
+func CreateCamera(anchor Player) *Camera {
+	return &Camera{anchor.Pos.X, anchor.Pos.Y, anchor}
 }
 
 func (cam *Camera) Update() {

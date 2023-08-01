@@ -60,11 +60,12 @@ func init() {
 }
 
 func main() {
+	keyboard := *top.CreateKeyboard()
 	world := files.Load()
-	player := top.CreatePlayer(3, 3, &world)
-	camera := top.CreateCamera(player)
+	player := *top.CreatePlayer(3, 3, &world)
+	camera := *top.CreateCamera(player)
 
-	game := Game{World: world, Player: player, Camera: camera}
+	game := Game{Keys: keyboard, World: world, Player: player, Camera: camera}
 
 	ebiten.SetWindowSize(constants.ScreenWidth, constants.ScreenHeight)
 	ebiten.SetWindowTitle("GoRPG")

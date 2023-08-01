@@ -22,11 +22,11 @@ func (sprite *Sprite) Draw(screen *ebiten.Image, options ebiten.DrawImageOptions
 
 func CreateSprite(path string) *Sprite {
 	img := CreateImage(path)
-	width, height := img.Size()
+	size := img.Bounds().Size()
 
 	return &Sprite{
-		width,
-		height,
+		size.X,
+		size.Y,
 		path,
 		img,
 	}

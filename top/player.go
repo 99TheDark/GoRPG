@@ -17,8 +17,8 @@ type Player struct {
 	World     *World
 }
 
-func CreatePlayer(x, y float64, world *World) Player {
-	return Player{
+func CreatePlayer(x, y float64, world *World) *Player {
+	return &Player{
 		utils.CreatePoint(x, y),
 		utils.CreatePoint(x, y),
 		utils.CreateSprite("olivia/down_1.png"),

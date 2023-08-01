@@ -11,6 +11,10 @@ type Keyboard struct {
 	Keys []ebiten.Key
 }
 
+func CreateKeyboard() *Keyboard {
+	return &Keyboard{[]ebiten.Key{}}
+}
+
 func (keyboard *Keyboard) Update() {
 	keyboard.Keys = inpututil.AppendJustPressedKeys(keyboard.Keys)
 	for _, el := range inpututil.AppendJustReleasedKeys([]ebiten.Key{}) {
