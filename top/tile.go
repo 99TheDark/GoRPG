@@ -2,7 +2,6 @@ package top
 
 import (
 	"game/connections"
-	"game/constants"
 	"game/utils"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -11,32 +10,30 @@ import (
 type Tile struct {
 	Pos       *utils.Point
 	Sprite    *utils.Sprite
-	Type      constants.TileType
+	Type      connections.TileType
 	Variation connections.Variation
 }
 
 type TileJSON struct {
 	X         float64                `json:"x"`
 	Y         float64                `json:"y"`
-	Type      constants.TileType     `json:"type"`
+	Type      connections.TileType   `json:"type"`
 	Variation *connections.Variation `json:"var,omitempty"`
 }
 
-func CreateTile(x, y float64, tiletype constants.TileType, variation connections.Variation) *Tile {
+func CreateTile(x, y float64, tiletype connections.TileType, variation connections.Variation) *Tile {
+	var path string
 	if tiletype.Connectable() {
-		return &Tile{
-			utils.CreatePoint(x, y),
-			utils.CreateSprite(tiletype.String() + "/" + variation.String() + ".png"),
-			tiletype,
-			variation,
-		}
+		path = tiletype.String() + "/" + variation.String()
 	} else {
-		return &Tile{
-			utils.CreatePoint(x, y),
-			utils.CreateSprite("objects/" + tiletype.String() + ".png"),
-			tiletype,
-			variation,
-		}
+		path = "objects/" + tiletype.String()
+	}
+
+	return &Tile{
+		utils.CreatePoint(x, y),
+		utils.CreateSprite(path + ".png"),
+		tiletype,
+		variation,
 	}
 }
 
@@ -45,17 +42,23 @@ func (t *Tile) Draw(screen *ebiten.Image, options ebiten.DrawImageOptions) {
 }
 
 func TileToJSON(tile Tile) TileJSON {
+	var variation *connections.Variation
 	if tile.Variation == connections.Default {
-		return TileJSON{tile.Pos.X, tile.Pos.Y, tile.Type, nil}
+		variation = nil
 	} else {
-		return TileJSON{tile.Pos.X, tile.Pos.Y, tile.Type, &tile.Variation}
+		variation = &tile.Variation
 	}
+
+	return TileJSON{tile.Pos.X, tile.Pos.Y, tile.Type, variation}
 }
 
 func TileFromJSON(json TileJSON) Tile {
+	var variation connections.Variation
 	if json.Variation == nil {
-		return *CreateTile(json.X, json.Y, json.Type, connections.Default)
+		variation = connections.Default
 	} else {
-		return *CreateTile(json.X, json.Y, json.Type, *json.Variation)
+		variation = *json.Variation
 	}
+
+	return *CreateTile(json.X, json.Y, json.Type, variation)
 }

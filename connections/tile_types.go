@@ -1,4 +1,6 @@
-package constants
+package connections
+
+import "game/utils"
 
 type TileType string
 
@@ -7,20 +9,20 @@ const (
 	Crate TileType = "crate"
 )
 
+var SolidTiles = []TileType{
+	Crate,
+}
+
+var ConnectableTiles = []TileType{
+	Grass,
+}
+
 func (tiletype TileType) Solid() bool {
-	switch tiletype {
-	case Crate:
-		return true
-	}
-	return false
+	return utils.IndexOf(SolidTiles, tiletype) != -1
 }
 
 func (tiletype TileType) Connectable() bool {
-	switch tiletype {
-	case Grass:
-		return true
-	}
-	return false
+	return utils.IndexOf(ConnectableTiles, tiletype) != -1
 }
 
 func (tiletype TileType) String() string {

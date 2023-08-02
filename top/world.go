@@ -8,7 +8,7 @@ import (
 
 type World []*Tile
 
-func (world *World) Add(x, y float64, tiletype constants.TileType, variation connections.Variation) {
+func (world *World) Add(x, y float64, tiletype connections.TileType, variation connections.Variation) {
 	new_tile := CreateTile(x, y, tiletype, variation)
 	for _, tile := range *world {
 		if tile == new_tile {

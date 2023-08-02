@@ -35,8 +35,8 @@ func Normalize(num float64) float64 {
 }
 
 func IndexOf[T comparable](arr []T, el T) int {
-	for i := 0; i < len(arr); i++ {
-		if arr[i] == el {
+	for i, item := range arr {
+		if item == el {
 			return i
 		}
 	}
