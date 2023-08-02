@@ -15,6 +15,14 @@ func (tiletype TileType) Solid() bool {
 	return false
 }
 
+func (tiletype TileType) Connectable() bool {
+	switch tiletype {
+	case Grass:
+		return true
+	}
+	return false
+}
+
 func (tiletype TileType) String() string {
 	return string(tiletype)
 }
