@@ -6,7 +6,7 @@ const (
 	Scale        float64 = 4    // Tile scale multiplier
 	ScreenWidth  int     = 960  // Width of window
 	ScreenHeight int     = 640  // Height of window
-	PlayerSpeed  float64 = 0.06 // Speed of the player
+	PlayerSpeed  float64 = 0.05 // Speed of the player
 )
 
 // Casted

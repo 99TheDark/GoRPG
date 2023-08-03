@@ -1,6 +1,7 @@
 package constants
 
 // All non-completed animations will be the down animation for now.
+// Need to make animations play idle right-foot, idle left-foot
 var PlayerAnimation = map[Direction]([]string){
 	Up: []string{
 		"olivia/up_1.png",
@@ -18,9 +19,9 @@ var PlayerAnimation = map[Direction]([]string){
 		"olivia/down_3.png",
 	},
 	Right: []string{
-		"olivia/down_1.png",
-		"olivia/down_2.png",
-		"olivia/down_3.png",
+		"olivia/right_1.png",
+		"olivia/right_2.png",
+		"olivia/right_3.png",
 	},
 	UpLeft: []string{
 		"olivia/up_left_1.png",

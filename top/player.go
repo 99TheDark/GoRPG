@@ -37,7 +37,7 @@ func (p *Player) Animate() {
 
 	delta := math.Max(math.Abs(dx), math.Abs(dy))
 	anim := constants.PlayerAnimation[p.Direction]
-	frame := int(math.Floor(delta * float64(len(anim))))
+	frame := int(math.Floor(delta*float64(len(anim)))) % len(anim)
 
 	p.Sprite.Image = utils.CreateImage(anim[frame])
 }
